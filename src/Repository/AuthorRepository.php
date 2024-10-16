@@ -11,6 +11,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AuthorRepository extends ServiceEntityRepository
 {
+
+    public function addAuthor($userName, $email,ManagerRegistry $m){
+        $author = new Author();
+        $author->setUsername($userName);
+        $author->setEmail($email);
+        $em= $m ->getManager();
+        $em->persist($author);
+        $em->flush();
+
+    }
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Author::class);
