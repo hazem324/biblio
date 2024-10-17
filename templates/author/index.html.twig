@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librery</title>
+    <title>Library</title>
 
     <style>
         body {
@@ -35,21 +35,46 @@
         tr:hover {
             background-color: rgba(200, 200, 200, 0.5); 
         }
+        .btn {
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 5px;
+            display: inline-block;
+        }
+        .btn-edit {
+            background-color: #007bff; 
+            color: white;
+            border: 1px solid #007bff;
+        }
+        .btn-delete {
+            background-color: #dc3545; 
+            color: white;
+            border: 1px solid #dc3545;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <table>
- <tr>
-     <th><strong>Name</strong> </th>
-     <th><strong>Email</strong></th>
-  </tr>
-   {% for person in personne %}
-<tr>
-    <th>{{person.userName}}</th>
-    <th>{{person.email}}</th>
-  </tr>
-   {% endfor %}
+        <tr>
+            <th><strong>Name</strong></th>
+            <th><strong>Email</strong></th>
+            <th><strong>Edit/Delete</strong></th>
+        </tr>
+        {% for person in personne %}
+        <tr>
+            <td>{{ person.userName }}</td>
+            <td>{{ person.email }}</td>
+            <td>
+                <a href="{{path('app_updateformauthors',{'id':person.id})}}" class="btn btn-edit">Edit</a>
+                <a href="{{path('app_deleteauthors',{'id':person.id})}}" class="btn btn-delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
     </table>
-
 </body>
 </html>
