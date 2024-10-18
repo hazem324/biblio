@@ -82,7 +82,7 @@ class AuthorController extends AbstractController
 
 
     #[Route('/delete-auth/{id}', name: 'app_deleteauthors')]
-    public function deleteAuth(ManagerRegistry $m,Request $req,$id,AuthorRepository $rep): Response
+    public function deleteAuth(ManagerRegistry $m, $id,AuthorRepository $rep): Response
     {$em=$m->getManager();
         $author=$rep->find($id); 
         $em->remove($author);

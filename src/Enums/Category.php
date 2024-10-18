@@ -3,7 +3,7 @@ namespace App\Enums;
 
 enum Category: string
 {
-    case COMEDY = 'Comedy';
+    case SCIENCE = 'Science-Fiction';
     case MYSTERY = 'Mystery';
-    case DRAMA = 'Drama'; 
+    case BIOGRAPHY = 'Autobiography '; 
 }
