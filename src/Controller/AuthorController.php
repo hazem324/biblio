@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\RecherchType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,21 @@ use App\Form\PersonneType;
 class AuthorController extends AbstractController
 {
     #[Route('/author', name: 'app_author')]
-    public function index(AuthorRepository $authorRepository): Response
+    public function index(AuthorRepository $authorRepository , Request $req): Response
     {
+       /* $authors = $authorRepository->findAll();
+       $f= $this->createForm(RecherchType::class);
+       $f->handleRequest($this->$req);
+       $data= $f->get('rechcerche') ->getData();
+       if($f ->isSubmitted()){
+           $authorRepository -> recherche($data );
+       }
+
+       $authors = $authorRepository->filterName();
+        return $this->render('author/index.html.twig', [
+           'personne'  => $authors,
+        ]);*/
+
         $authors = $authorRepository->findAll();
         return $this->render('author/index.html.twig', [
            'personne'  => $authors,
@@ -76,5 +90,8 @@ class AuthorController extends AbstractController
         return $this->redirectToRoute('app_author');
             
     }
+
+
+    
 }
 

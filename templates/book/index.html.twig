@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,28 +60,34 @@
     </style>
 </head>
 <body>
+
     <table>
         <tr>
-            <th><strong>Name</strong></th>
-            <th><strong>Email</strong></th>
+            <th><strong>Title</strong></th>
+            <th><strong>Publication Date</strong></th>
+            <th><strong>Published</strong></th>
+            <th><strong>Category</strong></th>
+            <th><strong>Author</strong></th>
             <th><strong>Edit/Delete</strong></th>
         </tr>
-        {% if personne is empty %}
-            <tr>
-                <td colspan="3">No data available</td>
-            </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.pubDate | date('Y-m-d') }}</td>
+            <td>{{ book.enabled ? 'Yes' : 'No' }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.author.username }}</td>
+            <td>
+                <a href="{{ path('app_updateformauthors', {'id': book.id}) }}" class="btn btn-edit">Edit</a>
+                <a href="{{ path('app_deleteauthors', {'id': book.id}) }}" class="btn btn-delete">Delete</a>
+            </td>
+        </tr>
         {% else %}
-            {% for person in personne %}
-            <tr>
-                <td>{{ person.userName }}</td>
-                <td>{{ person.email }}</td>
-                <td>
-                    <a href="{{ path('app_updateformauthors', {'id': person.id}) }}" class="btn btn-edit">Edit</a>
-                    <a href="{{ path('app_deleteauthors', {'id': person.id}) }}" class="btn btn-delete">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        {% endif %}
+        <tr>
+            <td colspan="6">No books available</td>
+        </tr>
+        {% endfor %}
     </table>
+
 </body>
 </html>

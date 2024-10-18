@@ -1,0 +1,69 @@
+{# templates/book/add.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Add Book</h1>
+        <div class="form-container">
+            {{ form_start(addBookForm, {'attr': {'class': 'form'}}) }}
+                <div class="form-group">
+                    {{ form_label(addBookForm.title, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(addBookForm.title, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(addBookForm.title) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(addBookForm.pubDate, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(addBookForm.pubDate, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(addBookForm.pubDate) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(addBookForm.enabled, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(addBookForm.enabled, {'attr': {'class': 'form-check-input'}}) }}
+                    <label class="form-check-label" for="{{ addBookForm.enabled.vars.id }}">
+                        {{ addBookForm.enabled.vars.label }}
+                    </label>
+                    {{ form_errors(addBookForm.enabled) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(addBookForm.category, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(addBookForm.category, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(addBookForm.category) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(addBookForm.author, null, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(addBookForm.author, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(addBookForm.author) }}
+                </div>
+            {{ form_end(addBookForm) }}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, for some components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
