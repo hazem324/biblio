@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use App\Entity\Book;
+use App\Form\SearchType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,30 @@ class BookController extends AbstractController
     #[Route('/book', name: 'app_book')]
     public function index(BookRepository $bookRepository, Request $request): Response
     {
+
            $books = $bookRepository->findAll();
-        return $this->render('book/index.html.twig', [
-            'books' => $books,
-        ]);
+
+           $f = $this->createForm(SearchType ::class);
+           $f->handleRequest($request);
+
+           if ($f->isSubmitted()) {
+            $data = $f->get('search')->getData();
+
+            
+
+            $books = $bookRepository->filterBookByTitle($data);
+           
+            return $this->render('book/index.html.twig', [
+                'books' => $books,
+                'searchForm' =>  $f ->createView(),
+            ]);
+           } 
+            return $this->render('book/index.html.twig', [
+                'books' => $books,
+                'searchForm' =>  $f ->createView(),
+            ]);
+           
+        
     }
 
 
@@ -31,8 +52,8 @@ class BookController extends AbstractController
         $addForm = $this->createForm(BookType::class, $book);
         $addForm-> handleRequest($req);
         if($addForm->isSubmitted() && $addForm->isValid()){
-$em->persist($book);
-$em->flush();
+        $em->persist($book);
+        $em->flush();
            return $this->redirectToRoute("app_book");
         }
         return $this->render('book/addBook.html.twig', [
@@ -42,7 +63,7 @@ $em->flush();
 
 
     #[Route('/edit-book/{id}', name: 'app_updateformbook')]
-    public function editAuth(ManagerRegistry $m,Request $req,$id,BookRepository $rep): Response
+    public function editBook(ManagerRegistry $m,Request $req,$id,BookRepository $rep): Response
     {
         $em=$m->getManager();
         $book=$rep->find($id);

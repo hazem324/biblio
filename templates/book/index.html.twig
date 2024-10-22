@@ -57,9 +57,63 @@
         .btn:hover {
             opacity: 0.8;
         }
+
+
+
+
+        .search-form-container {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center; /* Center the form in the container */
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-form-row {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Space between form elements */
+    }
+
+    .search-input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 250px; /* Adjust the width as needed */
+    }
+
+    .btn-search {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-search:hover {
+        background-color: #0056b3;
+    }
     </style>
 </head>
 <body>
+
+   <div class="search-form-container">
+    {{ form_start(searchForm, {'attr': {'class': 'search-form'}}) }}
+        <div class="search-form-row">
+            {{ form_widget(searchForm.search) }}  <!-- This will render the text field -->
+            {{ form_widget(searchForm.recherche) }}  <!-- This will render the submit button -->
+        </div>
+    {{ form_end(searchForm) }}
+</div>
 
     <table>
         <tr>
@@ -78,8 +132,8 @@
             <td>{{ book.category.value }}</td>
             <td>{{ book.author.username }}</td>
             <td>
-                <a href="{{ path('app_updateformauthors', {'id': book.id}) }}" class="btn btn-edit">Edit</a>
-                <a href="{{ path('app_deleteauthors', {'id': book.id}) }}" class="btn btn-delete">Delete</a>
+                <a href="{{ path('app_updateformbook', {'id': book.id}) }}" class="btn btn-edit">Edit</a>
+                <a href="{{ path('app_deletebook', {'id': book.id}) }}" class="btn btn-delete">Delete</a>
             </td>
         </tr>
         {% else %}
