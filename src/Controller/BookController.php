@@ -31,6 +31,8 @@ class BookController extends AbstractController
         $addForm = $this->createForm(BookType::class, $book);
         $addForm-> handleRequest($req);
         if($addForm->isSubmitted() && $addForm->isValid()){
+$em->persist($book);
+$em->flush();
            return $this->redirectToRoute("app_book");
         }
         return $this->render('book/addBook.html.twig', [

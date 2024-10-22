@@ -75,7 +75,7 @@
             <td>{{ book.title }}</td>
             <td>{{ book.pubDate | date('Y-m-d') }}</td>
             <td>{{ book.enabled ? 'Yes' : 'No' }}</td>
-            <td>{{ book.category }}</td>
+            <td>{{ book.category.value }}</td>
             <td>{{ book.author.username }}</td>
             <td>
                 <a href="{{ path('app_updateformauthors', {'id': book.id}) }}" class="btn btn-edit">Edit</a>

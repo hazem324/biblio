@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\Category;
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,8 +27,10 @@ class Book
     #[ORM\Column]
     private ?bool $enabled = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $category = null;
+    #[ORM\Column(type:"string",enumType: Category::class)]
+    private ?Category $category = null;
+
+  
 
     public function getId(): ?int
     {
@@ -82,15 +85,17 @@ class Book
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): static
+    public function setCategory(Category $category): static
     {
         $this->category = $category;
 
         return $this;
     }
+
+    
 }
