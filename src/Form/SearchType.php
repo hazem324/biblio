@@ -5,6 +5,8 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use App\Enums\Category;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,17 +17,25 @@ class SearchType extends AbstractType
         $builder
       
         ->add('search', TextType::class, [
-            'label' => 'Search by Title', // You can set the label you want
+            'label' => 'Search by Title', 
             'attr' => [
-                'placeholder' => 'Enter title...', // Placeholder text
-                'class' => 'search-input', // CSS class for styling
+                'placeholder' => 'Enter title...', 
+                'class' => 'search-input', 
             ],
         ])
-        // Add a submit button
+
+        ->add('category', EnumType::class, [
+            'class' => Category::class,
+            'placeholder' => 'Select a category',
+            'attr' => [
+                'class' => 'category-select', 
+            ],
+        ])
+
         ->add('recherche', SubmitType::class, [
             'label' => 'Search',
             'attr' => [
-                'class' => 'btn btn-search', // CSS class for styling
+                'class' => 'btn btn-search', 
             ],
         ]);
     }

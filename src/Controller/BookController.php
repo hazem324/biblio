@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Enums\Category;
 
 class BookController extends AbstractController
 {
@@ -24,11 +25,15 @@ class BookController extends AbstractController
            $f->handleRequest($request);
 
            if ($f->isSubmitted()) {
-            $data = $f->get('search')->getData();
-
+            $title = $f->get('search')->getData();
+            $categoy = $f -> get('category')->getData();
+            $categoryValue = $categoy->value;
+    
+           /* dump($categoryValue);
             
-
-            $books = $bookRepository->filterBookByTitle($data);
+               dump($title).die();*/
+            $books = $bookRepository->filterBookByTitleAndCategorir($title, $categoryValue);
+            //$bookRepository->filterBookByTitle($title);
            
             return $this->render('book/index.html.twig', [
                 'books' => $books,

@@ -27,6 +27,17 @@ class BookRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function filterBookByTitleAndCategorir ($title, $category) : array 
+    {
+        return $this->createQueryBuilder('a')
+        ->where('a.title LIKE :title ')
+        ->setParameter('title',$title)
+        ->andWhere('a.category LIKE :category')
+        ->setParameter('category',$category)
+        ->getQuery()
+        ->getResult();
+    }
+
     //    /**
     //     * @return Book[] Returns an array of Book objects
     //     */

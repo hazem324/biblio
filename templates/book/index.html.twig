@@ -102,6 +102,33 @@
     .btn-search:hover {
         background-color: #0056b3;
     }
+
+
+     .category-select {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 250px; /* Adjust the width if necessary */
+        background-color: white;
+        color: #333;
+        appearance: none; /* Removes default dropdown arrow for customization */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23333" d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 12px;
+    }
+
+    .category-select:focus {
+        outline: none;
+        border-color: #007bff; /* Focus border color */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light shadow for focus */
+    }
+
+    /* Style for removing default dropdown arrow */
+    .category-select::-ms-expand {
+        display: none;
+    }
     </style>
 </head>
 <body>
@@ -109,8 +136,9 @@
    <div class="search-form-container">
     {{ form_start(searchForm, {'attr': {'class': 'search-form'}}) }}
         <div class="search-form-row">
-            {{ form_widget(searchForm.search) }}  <!-- This will render the text field -->
-            {{ form_widget(searchForm.recherche) }}  <!-- This will render the submit button -->
+            {{ form_widget(searchForm.search) }}
+            {{ form_widget(searchForm.category) }}  
+            {{ form_widget(searchForm.recherche) }}  
         </div>
     {{ form_end(searchForm) }}
 </div>
